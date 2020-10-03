@@ -1,0 +1,18 @@
+[
+  {
+    "item": "Reading books",
+    "isCompleted": false
+  },
+  {
+    "item": "Watching football",
+    "isCompleted": false
+  },
+  {
+    "item": "Programming on react",
+    "isCompleted": true
+  },
+  {
+    "item": "Coding on Python",
+    "isCompleted": false
+  }
+]

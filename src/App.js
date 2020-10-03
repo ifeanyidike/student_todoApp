@@ -1,26 +1,53 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import TodoStuff from "./todostuff";
+import TodoForm from "./components/TodoForm";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Todo from "./components/Todos";
+import { Container } from "react-bootstrap";
+import "./App.css";
 
-function App() {
+export default function App() {
+  const [todos, setTodos] = useState(TodoStuff);
+
+  const addItem = (item) => {
+    const newTodos = [...todos, { item }];
+    setTodos(newTodos);
+  };
+
+  //complete items
+  const completeTodos = (index) => {
+    const newTodos = [...todos];
+    newTodos[index].isCompleted = true;
+    setTodos(newTodos);
+  };
+
+  //remove itemsn
+
+  const removeTodos = (index) => {
+    const newTodos = [...todos];
+    newTodos.splice(index, 1);
+    setTodos(newTodos);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='app'>
+      <Header />
+      <Container className='py-4 app__content'>
+        {todos.map((todo, index) => (
+          <Todo
+            key={index}
+            index={index}
+            todo={todo}
+            completeTodos={completeTodos}
+            removeTodos={removeTodos}
+          />
+        ))}
+
+        <TodoForm addNewItem={addItem} />
+      </Container>
+
+      <Footer />
     </div>
   );
 }
-
-export default App;
